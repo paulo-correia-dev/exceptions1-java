@@ -42,10 +42,25 @@ public class Reserva {
 		
 	}
 	
-	public void atualizarData(LocalDate checkin, LocalDate checkout) {
+	public String atualizarData(LocalDate checkin, LocalDate checkout) {
+		
+		LocalDate hoje = LocalDate.now();
+		
+		if(checkin.isBefore(hoje) || checkout.isBefore(hoje)) {
+			
+			return "Erro na reserva: As datas para atualização devem ser futuras.";
+		}
+		
+		if(!checkout.isAfter(checkin)) {
+			
+			return "Erro na reserva: Data de checkou anterior a data de checkin.";
+			
+		}
 		
 		this.checkin = checkin;
 		this.checkout = checkout;
+		
+		return null;
 		
 	}
 
